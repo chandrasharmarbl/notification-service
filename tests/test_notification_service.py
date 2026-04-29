@@ -21,3 +21,11 @@ class TestNotificationService:
         service.sendAlertNotification("System is down!")
 
         sms_sender.send.assert_called_once_with("broadcast", "System is down!")
+
+    def test_send_promotion_handles_email_sender_exception_gracefully(self, mocker):
+        email_sender = mocker.MagicMock(spec=INotificationSender)
+        sms_sender = mocker.MagicMock(spec=INotificationSender)
+        email_sender.send.side_effect = Exception("SMTP failure")
+        service = NotificationService(email_sender, sms_sender)
+
+        service.sendPromotion("bob@example.com", "50% off!")
