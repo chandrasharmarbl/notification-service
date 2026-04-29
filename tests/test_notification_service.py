@@ -13,3 +13,11 @@ class TestNotificationService:
                                                                                                                                                                                                                     
         email_sender.send.assert_called_once_with("alice@example.com", "Welcome!")
 
+    def test_send_alert_notification_calls_sms_sender_with_correct_message(self, mocker):
+        email_sender = mocker.MagicMock(spec=INotificationSender)
+        sms_sender = mocker.MagicMock(spec=INotificationSender)
+        service = NotificationService(email_sender, sms_sender)
+
+        service.sendAlertNotification("System is down!")
+
+        sms_sender.send.assert_called_once_with("broadcast", "System is down!")
