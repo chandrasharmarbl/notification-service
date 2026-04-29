@@ -1,5 +1,5 @@
 import pytest                                                                                                                                                                                                      
-from notification_service import NotificationService, INotificationSender                                                                                                                                          
+from src.notification_service import NotificationService, INotificationSender                                                                                                                                          
                                                                                                                                                                                                                     
                                                                                                                                                                                                                     
 class TestNotificationService:                                                                                                                                                                                     
