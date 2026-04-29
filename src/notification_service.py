@@ -1,4 +1,7 @@
+import logging
 from abc import ABC, abstractmethod
+
+logger = logging.getLogger(__name__)
 
 
 class INotificationSender(ABC):
@@ -21,5 +24,5 @@ class NotificationService:
     def sendPromotion(self, recipient: str, message: str) -> None:
         try:
             self.email_sender.send(recipient, message)
-        except Exception:
-            pass
+        except Exception as e:
+            logger.warning("Promotion notification failed for %s: %s", recipient, e)
