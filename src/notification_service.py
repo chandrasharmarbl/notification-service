@@ -17,3 +17,9 @@ class NotificationService:
 
     def sendAlertNotification(self, message: str) -> None:
         self.sms_sender.send("broadcast", message)
+
+    def sendPromotion(self, recipient: str, message: str) -> None:
+        try:
+            self.email_sender.send(recipient, message)
+        except Exception:
+            pass
