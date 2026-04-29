@@ -14,3 +14,6 @@ class NotificationService:
 
     def sendWelcomeNotification(self, recipient: str) -> None:
         self.email_sender.send(recipient, "Welcome!")
+
+    def sendAlertNotification(self, message: str) -> None:
+        self.sms_sender.send("broadcast", message)
